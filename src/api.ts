@@ -48,11 +48,11 @@ export const createTodo = async (data: Omit<ITask, 'id'>): Promise<any> => {
 }
 
 //обновление задачи
-export const updateTodo = async (id: string, data: Omit<ITask, 'id'>): Promise<any> => {
+export const updateTodo = async (id: string, title: string): Promise<any> => {
   //запись которую нужно обновить
   const ref = doc(db, todosCollection, id)
   try {
-    await updateDoc(ref, data);
+    await updateDoc(ref, {title: title});
   } catch (error) {
     return  Promise.reject(error)
   }
