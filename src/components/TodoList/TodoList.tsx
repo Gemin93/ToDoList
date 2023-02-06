@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ITask} from "../../types";
-import {getTodos, updateTodo} from "../../api";
+import {getTodos} from "../../api";
 import {Todo} from "../Todo/Todo";
 import './TodoList.css'
 
@@ -17,7 +17,7 @@ export const TodoList: FC = () => {
     <>
       <div className="todo-list">
         {todo.map((item) =>(
-          <Todo key={item.id} id={item.id} title={item.title} complete={item.completed} handleEdit={updateTodo}></Todo>
+          <Todo key={item.id} id={item.id} title={item.title} complete={item.completed} ></Todo>
         ))}
       </div>
 

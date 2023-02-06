@@ -2,16 +2,16 @@ import React, {ChangeEvent, FC, useState} from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {updateTodo, deleteTodo} from "../../api";
 import './Todo.css'
 
 interface TodoProps {
   id: string;
   title: string;
   complete: boolean;
-  handleEdit: (id: string, title: string) => Promise<any>
 }
 
-export const Todo: FC<TodoProps> = ({id,title, complete, handleEdit}) => {
+export const Todo: FC<TodoProps> = ({id,title, complete}) => {
   const [newTitle, setNewTitle] = useState(title)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +36,10 @@ export const Todo: FC<TodoProps> = ({id,title, complete, handleEdit}) => {
           <button className="button-complete">
             <CheckCircleIcon id="i"/>
           </button>
-          <button className="button-edit" onClick={() => handleEdit(id, newTitle)}>
+          <button className="button-edit" onClick={() => updateTodo(id, newTitle)}>
             <EditIcon id="i"/>
           </button>
-          <button className="button-delete">
+          <button className="button-delete" onClick={() => deleteTodo(id)}>
             <DeleteIcon id="i"/>
           </button>
         </div>

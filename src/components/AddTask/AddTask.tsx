@@ -3,12 +3,7 @@ import './AddTask.css';
 import {ITask} from "../../types";
 import {createTodo} from "../../api";
 
-// interface AddTaskProps {
-//   createTodo: (title: string, completed: boolean) => Promise<any>
-// }
-
 export const AddTask = () => {
-  // const [nameTask, setNameTask] = useState('')
   const [task, setTask] = useState<Omit<ITask, 'id'>>({
     title: '',
     completed: false,
