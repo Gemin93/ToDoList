@@ -21,6 +21,10 @@ export const AddTask = () => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (task.title === ''){
+      alert('Задача не может буть пустой');
+      return
+    }
 
     await createTodo(task);
     setTask({

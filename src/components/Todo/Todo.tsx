@@ -23,6 +23,10 @@ export const Todo: FC<TodoProps> = ({id,title, complete}) => {
     }
   }
 
+  const completeTodo = (id: string) => {
+    setTimeout(() => deleteTodo(id), 2000)
+  }
+
   return (
     <div className="todo-container">
         <div className='todo'>
@@ -33,7 +37,7 @@ export const Todo: FC<TodoProps> = ({id,title, complete}) => {
           onChange={handleChange}
         />
         <div>
-          <button className="button-complete">
+          <button className="button-complete" onClick={() => completeTodo(id)}>
             <CheckCircleIcon id="i"/>
           </button>
           <button className="button-edit" onClick={() => updateTodo(id, newTitle)}>
