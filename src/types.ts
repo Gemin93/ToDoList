@@ -1,5 +1,6 @@
 export interface ITask {
   id: string;
   title: string;
-  completed: boolean
+  completed: boolean;
+  owner: string | undefined;
 }

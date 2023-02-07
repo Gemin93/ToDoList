@@ -10,17 +10,23 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../api';
+import {useHistory} from 'react-router-dom';
 
 const theme = createTheme();
 
 export const SignIn = () => {
+
+
+  const  history = useHistory();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    signInWithEmailAndPassword(auth, data.get('email') as string, data.get('password') as string)
+      .then(() => history.push('/account'))
+      .catch((error) => console.log(error.message));
   };
 
   return (

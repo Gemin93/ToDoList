@@ -9,10 +9,11 @@ import {SignUp} from "../SignUp/SignUp";
 export const App: FC = () => {
   return (
     <>
-      <Title/>
+
       <Switch>
         <Route path="/account">
           <div>
+            <Title/>
             <AddTask/>
             <TodoList/>
           </div>

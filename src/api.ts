@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, addDoc, collection, doc, updateDoc, deleteDoc, getDocs } from "firebase/firestore"
+import { getFirestore, addDoc, collection, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import {ITask} from "./types";
 
 // Your web app's Firebase configuration
@@ -17,26 +18,28 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-const todosCollection = 'todos'
+export const auth = getAuth(app);
+
+export const todosCollection = `todos`
 
 //получение задач
-export const getTodos = async (): Promise<ITask[]> => {
-  const todosList: ITask[] = [];
-
-  try {
-    const querySnapshot = await getDocs(collection(db, todosCollection));
-
-    querySnapshot.forEach((doc) => {
-      const data = doc.data() as Omit<ITask, 'id'>;
-      todosList.push({
-        id: doc.id, ...data,
-      })
-    })
-  } catch (error) {
-    return Promise.reject(error)
-  }
-  return todosList;
-}
+// export const getTodos = async (): Promise<ITask[]> => {
+//   const todosList: ITask[] = [];
+//
+//   try {
+//     const querySnapshot = await getDocs(collection(db, todosCollection));
+//
+//     querySnapshot.forEach((doc) => {
+//       const data = doc.data() as Omit<ITask, 'id'>;
+//       todosList.push({
+//         id: doc.id, ...data,
+//       })
+//     })
+//   } catch (error) {
+//     return Promise.reject(error)
+//   }
+//   return todosList;
+// }
 
 //созадние задачи
 export const createTodo = async (data: Omit<ITask, 'id'>): Promise<any> => {
