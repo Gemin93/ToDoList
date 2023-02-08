@@ -12,7 +12,9 @@ interface TodoProps {
 }
 
 export const Todo: FC<TodoProps> = ({id,title, complete}) => {
-  const [newTitle, setNewTitle] = useState(title)
+  const [newTitle, setNewTitle] = useState(title);
+  const [done, setDone] = useState(false);
+  const [onDelete, setOnDelete] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (complete) {
@@ -24,12 +26,18 @@ export const Todo: FC<TodoProps> = ({id,title, complete}) => {
   }
 
   const completeTodo = (id: string) => {
+    setDone(!complete);
     setTimeout(() => deleteTodo(id), 2000)
+  }
+
+  const todoDelete = (id: string) => {
+    setOnDelete(!onDelete);
+    setTimeout(() => deleteTodo(id), 1000)
   }
 
   return (
     <div className="todo-container">
-        <div className='todo'>
+        <div className={`todo ${done ? 'todo-done' : ''} ${onDelete ? 'todo-delete': ''}`}>
         <input
           type="text"
           className="todo-task"
@@ -40,10 +48,10 @@ export const Todo: FC<TodoProps> = ({id,title, complete}) => {
           <button className="button-complete" onClick={() => completeTodo(id)}>
             <CheckCircleIcon id="i"/>
           </button>
-          <button className="button-edit" onClick={() => updateTodo(id, newTitle)}>
+          <button className="button-edit" onClick={() => updateTodo(id, newTitle, done)}>
             <EditIcon id="i"/>
           </button>
-          <button className="button-delete" onClick={() => deleteTodo(id)}>
+          <button className="button-delete" onClick={() => todoDelete(id)}>
             <DeleteIcon id="i"/>
           </button>
         </div>
