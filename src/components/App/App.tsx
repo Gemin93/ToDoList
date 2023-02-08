@@ -4,7 +4,6 @@ import {AddTask} from "../AddTask/AddTask";
 import {TodoList} from "../TodoList/TodoList";
 import {Route, Switch} from "react-router-dom";
 import {SignIn} from "../SignIn/SignIn";
-import {SignUp} from "../SignUp/SignUp";
 
 export const App: FC = () => {
   return (
@@ -20,9 +19,6 @@ export const App: FC = () => {
         </Route>
         <Route path="/">
           <SignIn/>
-        </Route>
-        <Route path="/signup">
-          <SignUp/>
         </Route>
       </Switch>
 
