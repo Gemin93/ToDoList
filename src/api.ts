@@ -20,7 +20,7 @@ export const db = getFirestore(app);
 
 export const auth = getAuth(app);
 
-export const todosCollection = `todos`
+export const todosCollection = `todos`;
 
 //получение задач
 // export const getTodos = async (): Promise<ITask[]> => {
