@@ -22,25 +22,6 @@ export const auth = getAuth(app);
 
 export const todosCollection = `todos`;
 
-//получение задач
-// export const getTodos = async (): Promise<ITask[]> => {
-//   const todosList: ITask[] = [];
-//
-//   try {
-//     const querySnapshot = await getDocs(collection(db, todosCollection));
-//
-//     querySnapshot.forEach((doc) => {
-//       const data = doc.data() as Omit<ITask, 'id'>;
-//       todosList.push({
-//         id: doc.id, ...data,
-//       })
-//     })
-//   } catch (error) {
-//     return Promise.reject(error)
-//   }
-//   return todosList;
-// }
-
 //созадние задачи
 export const createTodo = async (data: Omit<ITask, 'id'>): Promise<any> => {
   try {

@@ -8,7 +8,6 @@ import {query, collection, onSnapshot, where} from "firebase/firestore";
 
 export const TodoList: FC = () => {
   const [todo, setTodo] = useState<ITask[]>([]);
-  // const userId = auth.currentUser?.uid;
 
   let userId: string | undefined = '';
 
@@ -16,7 +15,7 @@ export const TodoList: FC = () => {
     userId = user?.uid;
     return userId;
   })
-
+// отображение списка задач пользователя
   useEffect(() =>{
     const q = query(collection(db, todosCollection), where('owner', '==', userId));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
