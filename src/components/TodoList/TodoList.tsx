@@ -1,16 +1,24 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ITask} from "../../types";
-import { db, todosCollection} from "../../api";
+import {auth, db, todosCollection} from "../../api";
 import {Todo} from "../Todo/Todo";
 import './TodoList.css'
-import {query, collection, onSnapshot} from "firebase/firestore";
+import {query, collection, onSnapshot, where} from "firebase/firestore";
 
 
 export const TodoList: FC = () => {
   const [todo, setTodo] = useState<ITask[]>([]);
+  // const userId = auth.currentUser?.uid;
+
+  let userId: string | undefined = '';
+
+  auth.onAuthStateChanged((user) => {
+    userId = user?.uid;
+    return userId;
+  })
 
   useEffect(() =>{
-    const q = query(collection(db, todosCollection));
+    const q = query(collection(db, todosCollection), where('owner', '==', userId));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const todosList: ITask[] = [];
 
